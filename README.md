@@ -24,10 +24,11 @@ A push to `main` builds the site and publishes it with GitHub Pages through `.gi
 | `src/data.js` | Figures, lists and links that the page renders |
 | `src/main.js` | Rendering, scroll animation and the interactive parts |
 | `src/style.css` | Styles, built on the tokens of the visual identity |
-| `public/img/diagrams/` | The 23 architecture diagrams as WebP |
+| `public/img/diagrams/` | The 23 architecture diagrams as SVG |
 | `public/img/screens/` | The screens of the farmer, carrier and buyer views |
 | `public/brand/` | Logo and isotype |
-| `scripts/assets.mjs` | Rebuilds every image from the documents repository |
+| `scripts/assets.mjs` | Rebuilds the screens and the brand from the documents repository |
+| `scripts/diagrams.mjs` | Exports the diagrams to SVG from the draw.io file of the documents repository |
 
 The page uses Vite, GSAP with ScrollTrigger and Lenis. Outfit and Roboto Mono are bundled through Fontsource, so the site loads no font from another host.
 
@@ -46,12 +47,15 @@ Every figure on the page comes from a document of the [documents repository](htt
 
 ## Rebuild the images
 
-The diagrams, the screens and the brand are generated from the documents repository, cloned next to this one. The script needs `pdftoppm`, from poppler.
+The diagrams, the screens and the brand are generated from the documents repository, cloned next to this one.
 
 ```bash
-npm run assets                 # reads ../aromapacifico-devops-docs
-npm run assets -- <path>       # reads another clone
+npm run assets                 # screens and brand, needs pdftoppm from poppler
+npm run diagrams               # the 23 diagrams as SVG, needs the draw.io desktop CLI
+npm run assets -- <path>       # reads another clone, and the same for diagrams
 ```
+
+`npm run diagrams` exports each page of `docs/architecture/diagrams/platform-architecture.drawio` and keeps the labels as text. It calls the flatpak build of draw.io, and `DRAWIO_CMD` sets another command, such as `DRAWIO_CMD=drawio`. The Azure icons that the overview page uses are in `scripts/icons/`, since draw.io writes them as paths of its own installation.
 
 The logo and the isotype are cut from `docs/design/aroma-pacifico-branding.pdf`. Replace them with the vector export of the design file when it is available.
 

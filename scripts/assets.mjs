@@ -1,4 +1,5 @@
-// Rebuilds the images of the site from the documents repository.
+// Rebuilds the screens and the brand of the site from the documents repository.
+// The diagrams come from scripts/diagrams.mjs.
 // Usage: node scripts/assets.mjs [path to aromapacifico-devops-docs]
 // Needs pdftoppm (poppler) for the screens and the brand.
 import sharp from 'sharp';
@@ -10,14 +11,7 @@ import { join, resolve } from 'node:path';
 const docs = resolve(process.argv[2] || '../aromapacifico-devops-docs');
 const out = resolve('public');
 const tmp = mkdtempSync(join(tmpdir(), 'aroma-site-'));
-for (const d of ['img/diagrams', 'img/screens', 'brand']) mkdirSync(join(out, d), { recursive: true });
-
-// Diagrams, one WebP per page of the architecture file
-const dir = join(docs, 'docs/architecture/diagrams');
-for (const f of readdirSync(dir).filter((n) => n.endsWith('.drawio.png'))) {
-  const name = f.replace('.drawio.png', '');
-  await sharp(join(dir, f)).resize({ width: 2400, withoutEnlargement: true }).webp({ quality: 84 }).toFile(join(out, 'img/diagrams', `${name}.webp`));
-}
+for (const d of ['img/screens', 'brand']) mkdirSync(join(out, d), { recursive: true });
 
 // Screens of the three views, one WebP per page of each PDF
 for (const view of ['farmer', 'carrier', 'buyer']) {

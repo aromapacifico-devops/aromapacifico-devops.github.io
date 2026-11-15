@@ -39,35 +39,25 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1 class="reveal">Every sack of coffee, followed <em>from the farm to the port</em>.</h1>
-        <p class="hero-sub fade">A traceability pilot for 200 farms in Cauca, Huila and Tolima. Sensors that keep reporting with no signal, drones that confirm and treat pests, and a buyer who reads the history of one sack by scanning its code.</p>
-        <div class="hero-actions fade">
-          <a href="#journey" class="btn btn-blue"><span class="dot" aria-hidden="true"></span>Follow a sack</a>
-          <a href="#platform" class="link">See the architecture</a>
+        <h1 class="rise">Every sack of coffee, <em>followed from the farm to the port.</em></h1>
+        <p class="hero-sub rise">A traceability pilot for 200 farms in Cauca, Huila and Tolima. Sensors that keep reporting with no signal, drones that confirm and treat pests, and a buyer who reads the history of one sack by scanning its code.</p>
+        <div class="hero-actions rise">
+          <a href="#journey" class="btn btn-blue">Follow a sack<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#platform" class="btn btn-out">See the architecture</a>
         </div>
       </div>
 
-      <div class="lookup fade" aria-label="Example of the public lookup of a sack">
-        <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="lookup-in">
-          <div class="lookup-top">
-            <span class="mono code">AP-7K3M-Q29X-TDHB-6</span>
-            <span class="badge" id="heroBadge" data-state="prep">In preparation</span>
-          </div>
-          <span class="lookup-label">Origin</span>
-          <b class="lookup-origin">Cauca, Colombia</b>
-          <ol class="trail" id="heroTrail">
-            <li><b>Drying of the lot</b><span>7 days monitored</span></li>
-            <li><b>Sack registered</b><span>At the farm</span></li>
-            <li><b>Received at the center</b><span>Inspected and accepted</span></li>
-            <li><b>Dispatched to the port</b><span>In custody of the carrier</span></li>
-            <li><b>Delivered at the port</b><span>Buenaventura</span></li>
-          </ol>
-          <div class="lookup-foot">
-            <div><b class="mono">41.6 °C</b><span>Highest grain temperature</span></div>
-            <div><b class="mono">11.8 %</b><span>Humidity at the end</span></div>
-          </div>
+      <div class="tag rise" aria-label="Example of the label sewn to a sack">
+        <div class="tag-top"><span>Café de Colombia<br>60 kg · lot 12</span><img src="brand/isotype.png" alt=""></div>
+        <div class="tag-code">AP-7K3M-Q29X<br>-TDHB-6</div>
+        <div class="tag-rows">
+          <div><span>Origin</span><b>Cauca</b></div>
+          <div><span>State</span><b id="tagState">In preparation</b></div>
+          <div><span>Drying</span><b>7 days</b></div>
+          <div><span>Humidity</span><b>11.8 %</b></div>
         </div>
+        <div class="tag-foot"><div class="qr" id="tagQr" aria-hidden="true"></div><span>Scan to read its history</span></div>
+        <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
       </div>
     </div>
 
@@ -80,7 +70,7 @@
   <section class="section why">
     <div class="wrap why-grid">
       <div class="why-copy">
-        <h2 class="reveal">The 2020 design assumed <em>signal everywhere</em>.</h2>
+        <h2 class="rise">The 2020 design assumed <em>signal everywhere.</em></h2>
         <p class="fade">Some farms of the pilot lie outside coverage, drones fly far from any phone and each collection center starts with no network. The pilot keeps every capability of 2020 and replaces the connectivity premise that no longer holds.</p>
       </div>
       <div class="compare" id="compare">
@@ -93,7 +83,7 @@
   <section class="section tint" id="journey">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">Five stops, <em>one history</em>.</h2>
+        <h2 class="rise">Five stops, <em>one history.</em></h2>
         <p class="fade">Each stop adds an event to the sack, with its date, time and responsible person. Choose a stop to see what the platform records there and what it does while the link is down.</p>
       </div>
       <div class="jr fade">
@@ -110,11 +100,11 @@
   <section class="section" id="platform">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">Serverless, because <em>the load is small</em>.</h2>
+        <h2 class="rise">Serverless, because <em>the load is small.</em></h2>
         <p class="fade">About 11,000 messages a day in harvest, 0.13 a second. Sites at the edge hold their data until a path exists, and AWS receives each event, stores it once and runs a function that ends when its result is written. Between events nothing runs and almost nothing is billed.</p>
       </div>
       <figure class="diagram hero-diagram" data-zoom>
-        <div class="inner"><img src="img/diagrams/00-platform-overview.webp" alt="Diagram: the complete platform on AWS, from the farm to the port of Buenaventura" loading="lazy"></div>
+        <div class="inner"><img src="img/diagrams/00-platform-overview.svg" alt="Diagram: the complete platform on AWS, from the farm to the port of Buenaventura" loading="lazy"></div>
         <figcaption>The complete platform on one page. Blue boxes are built by the infrastructure code, white boxes are designed and documented. Click to open it full size.</figcaption>
       </figure>
 
@@ -132,7 +122,7 @@
   <section class="section tint" id="field">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">An outage becomes <em>a delay</em>.</h2>
+        <h2 class="rise">An outage becomes <em>a delay.</em></h2>
         <p class="fade">The node writes every reading to flash before its modem powers on, and deletes a record only after the cloud confirms it. Move the length of the outage and see what reaches the platform while a lot dries, with one reading an hour.</p>
       </div>
 
@@ -175,7 +165,7 @@
   <section class="section dark" id="code">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">The critical paths, <em>built in 100 hours</em>.</h2>
+        <h2 class="rise">The critical paths, <em>built in 100 hours.</em></h2>
         <p class="fade">Terraform builds the pattern of network, security and one environment, the telemetry ingestion path and the inference function. The 200 farms come from one module repeated. Every environment comes from the same code with different variables.</p>
       </div>
 
@@ -194,7 +184,7 @@
         <div class="mods fade">
           <h3>Five versioned modules</h3>
           <div id="modules"></div>
-          <figure class="fig-img" data-zoom><img src="img/diagrams/02-implementation-scope.webp" alt="Diagram: what the infrastructure code builds, box by box" loading="lazy"><figcaption>What the infrastructure code builds, box by box</figcaption></figure>
+          <figure class="fig-img" data-zoom><img src="img/diagrams/02-implementation-scope.svg" alt="Diagram: what the infrastructure code builds, box by box" loading="lazy"><figcaption>What the infrastructure code builds, box by box</figcaption></figure>
         </div>
       </div>
 
@@ -210,7 +200,7 @@
   <section class="section" id="cost">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">The cloud is <em>under two percent</em>.</h2>
+        <h2 class="rise">The cloud is <em>under two percent.</em></h2>
         <p class="fade">Figures in USD before IVA, at current prices. A following year of the pilot costs between 143,164 and 144,268. The drone service carries almost four fifths of it, and the cloud platform less than two percent.</p>
       </div>
       <div class="costs">
@@ -227,7 +217,7 @@
   <section class="section tint" id="design">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">Three views, readable <em>in full sun</em>.</h2>
+        <h2 class="rise">Three views, readable <em>in full sun.</em></h2>
         <p class="fade">The farmer, the carrier and the buyer share one identity. Warm neutrals fill the screen, color only signals, and the text that carries a decision outdoors reaches a contrast of 7 to 1.</p>
       </div>
 
@@ -251,7 +241,7 @@
   <section class="section" id="evidence">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="reveal">Every claim has <em>a document behind it</em>.</h2>
+        <h2 class="rise">Every claim has <em>a document behind it.</em></h2>
         <p class="fade">Each decision keeps the alternatives that were discarded, each figure the script that calculates it, and each assumption what changes if it fails.</p>
       </div>
       <div class="ev" id="ev"></div>
@@ -268,10 +258,10 @@
   <section class="outro">
     <div class="wrap outro-in">
       <img src="brand/isotype.png" alt="" width="56" class="outro-mark">
-      <h2 class="reveal">From the drying patio <em>to the buyer's hands</em>.</h2>
+      <h2 class="rise">From the drying patio <em>to the buyer's hands.</em></h2>
       <div class="outro-actions">
         <a id="outroArch" class="btn btn-blue" target="_blank" rel="noopener">Read the architecture</a>
-        <a id="outroOrg" class="btn btn-line" target="_blank" rel="noopener">Open the organization</a>
+        <a id="outroOrg" class="btn btn-out" target="_blank" rel="noopener">Open the organization</a>
       </div>
     </div>
     <svg class="waves" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">

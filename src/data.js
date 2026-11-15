@@ -213,7 +213,8 @@ export const views = [
   {
     k: 'buyer', name: 'Buyer', n: 5,
     text: 'Opens when the code of a sack is scanned, with no account. Origin, the dates of the journey and the drying, and nothing more.',
-    shots: [[1, 'Result on a phone'], [2, 'Rejected sack'], [3, 'Code not registered'], [4, 'Write the code']]
+    shots: [[1, 'Result on a phone'], [2, 'Rejected sack'], [3, 'Code not registered'], [4, 'Write the code']],
+    wide: [5, 'Result on a desktop']
   }
 ];
 
