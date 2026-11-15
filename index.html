@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma Pacifico · Coffee traceability from the farm to the port</title>
+<meta name="description" content="Architecture, infrastructure code, cost and design of a coffee traceability pilot for 200 farms in Cauca, Huila and Tolima, from the farm to the port of Buenaventura.">
+<meta name="theme-color" content="#FBF9F5">
+<link rel="icon" href="brand/isotype.png" type="image/png">
+<script type="module" src="/src/main.js"></script>
+</head>
+<body class="is-loading">
+
+<div id="pre" aria-hidden="true">
+  <img src="brand/isotype.png" alt="" class="pre-mark">
+  <div class="pre-band"><i></i><i></i><i></i></div>
+</div>
+
+<header class="nav">
+  <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap nav-in">
+    <a href="#top" class="nav-logo" aria-label="Aroma Pacifico, back to top"><img src="brand/logo.png" alt="Aroma Pacifico" height="34"></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#journey">Journey</a>
+      <a href="#platform">Platform</a>
+      <a href="#field">Field</a>
+      <a href="#code">Code</a>
+      <a href="#cost">Cost</a>
+      <a href="#design">Design</a>
+      <a href="#evidence">Evidence</a>
+    </nav>
+    <a href="https://github.com/aromapacifico-devops" class="btn btn-ink nav-cta" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="reveal">Every sack of coffee, followed <em>from the farm to the port</em>.</h1>
+        <p class="hero-sub fade">A traceability pilot for 200 farms in Cauca, Huila and Tolima. Sensors that keep reporting with no signal, drones that confirm and treat pests, and a buyer who reads the history of one sack by scanning its code.</p>
+        <div class="hero-actions fade">
+          <a href="#journey" class="btn btn-blue"><span class="dot" aria-hidden="true"></span>Follow a sack</a>
+          <a href="#platform" class="link">See the architecture</a>
+        </div>
+      </div>
+
+      <div class="lookup fade" aria-label="Example of the public lookup of a sack">
+        <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="lookup-in">
+          <div class="lookup-top">
+            <span class="mono code">AP-7K3M-Q29X-TDHB-6</span>
+            <span class="badge" id="heroBadge" data-state="prep">In preparation</span>
+          </div>
+          <span class="lookup-label">Origin</span>
+          <b class="lookup-origin">Cauca, Colombia</b>
+          <ol class="trail" id="heroTrail">
+            <li><b>Drying of the lot</b><span>7 days monitored</span></li>
+            <li><b>Sack registered</b><span>At the farm</span></li>
+            <li><b>Received at the center</b><span>Inspected and accepted</span></li>
+            <li><b>Dispatched to the port</b><span>In custody of the carrier</span></li>
+            <li><b>Delivered at the port</b><span>Buenaventura</span></li>
+          </ol>
+          <div class="lookup-foot">
+            <div><b class="mono">41.6 °C</b><span>Highest grain temperature</span></div>
+            <div><b class="mono">11.8 %</b><span>Humidity at the end</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="metrics" id="metrics"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section why">
+    <div class="wrap why-grid">
+      <div class="why-copy">
+        <h2 class="reveal">The 2020 design assumed <em>signal everywhere</em>.</h2>
+        <p class="fade">Some farms of the pilot lie outside coverage, drones fly far from any phone and each collection center starts with no network. The pilot keeps every capability of 2020 and replaces the connectivity premise that no longer holds.</p>
+      </div>
+      <div class="compare" id="compare">
+        <div class="compare-head"><span>Premise of 2020</span><span>Design of 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="section tint" id="journey">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Five stops, <em>one history</em>.</h2>
+        <p class="fade">Each stop adds an event to the sack, with its date, time and responsible person. Choose a stop to see what the platform records there and what it does while the link is down.</p>
+      </div>
+      <div class="jr fade">
+        <div class="jr-rail" role="tablist" aria-label="Stops of the journey">
+          <div class="jr-line"><i id="jrFill"></i></div>
+          <div class="jr-stops" id="jrStops"></div>
+        </div>
+        <div class="jr-panel" id="jrPanel" role="tabpanel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="section" id="platform">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Serverless, because <em>the load is small</em>.</h2>
+        <p class="fade">About 11,000 messages a day in harvest, 0.13 a second. Sites at the edge hold their data until a path exists, and AWS receives each event, stores it once and runs a function that ends when its result is written. Between events nothing runs and almost nothing is billed.</p>
+      </div>
+      <figure class="diagram hero-diagram" data-zoom>
+        <div class="inner"><img src="img/diagrams/00-platform-overview.webp" alt="Diagram: the complete platform on AWS, from the farm to the port of Buenaventura" loading="lazy"></div>
+        <figcaption>The complete platform on one page. Blue boxes are built by the infrastructure code, white boxes are designed and documented. Click to open it full size.</figcaption>
+      </figure>
+
+      <div class="layers-grid">
+        <aside class="layers-nav">
+          <ol id="layersNav"></ol>
+          <div class="layers-progress"><i id="layersBar"></i></div>
+        </aside>
+        <div class="layers-list" id="layersList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD -->
+  <section class="section tint" id="field">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">An outage becomes <em>a delay</em>.</h2>
+        <p class="fade">The node writes every reading to flash before its modem powers on, and deletes a record only after the cloud confirms it. Move the length of the outage and see what reaches the platform while a lot dries, with one reading an hour.</p>
+      </div>
+
+      <div class="demo fade">
+        <div class="demo-read">
+          <span class="demo-label">Farm node · drying, one reading an hour</span>
+          <div class="demo-big"><span id="oHours" class="mono">6</span><small>hours with no signal</small></div>
+          <span class="badge big" id="oBadge" data-state="ok">Nothing is lost</span>
+          <p class="demo-note" id="oNote"></p>
+        </div>
+        <div class="demo-main">
+          <div class="cells" id="oCells" aria-hidden="true"></div>
+          <div class="cells-legend">
+            <span><i class="c-sent"></i>Delivered when the signal returns</span>
+            <span><i class="c-drop"></i>Deleted and counted</span>
+            <span><i class="c-idle"></i>Not measured yet</span>
+          </div>
+          <div class="demo-controls">
+            <label for="oRange">Length of the outage</label>
+            <input id="oRange" type="range" min="0" max="36" step="1" value="6">
+            <div class="demo-figs">
+              <div><b class="mono" id="oSent">6</b><span>readings delivered</span></div>
+              <div><b class="mono" id="oDrop">0</b><span>deleted and counted</span></div>
+              <div><b class="mono" id="oDelay">7 h</b><span>delay at most</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fail">
+        <h3 class="fade">What happens when something fails</h3>
+        <div class="fail-table" id="failures">
+          <div class="fail-head"><span>Failure</span><span>What the platform does</span><span>What is lost</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE -->
+  <section class="section dark" id="code">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">The critical paths, <em>built in 100 hours</em>.</h2>
+        <p class="fade">Terraform builds the pattern of network, security and one environment, the telemetry ingestion path and the inference function. The 200 farms come from one module repeated. Every environment comes from the same code with different variables.</p>
+      </div>
+
+      <div class="pipe" id="pipe">
+        <div class="pipe-line"><i id="pipeFill"></i><b id="pipeDot"></b></div>
+        <ol class="pipe-steps" id="pipeSteps"></ol>
+      </div>
+
+      <div class="proof" id="proof"></div>
+
+      <div class="code-grid">
+        <div class="boxes fade">
+          <h3>Ten boxes of the architecture</h3>
+          <div id="boxes"></div>
+        </div>
+        <div class="mods fade">
+          <h3>Five versioned modules</h3>
+          <div id="modules"></div>
+          <figure class="fig-img" data-zoom><img src="img/diagrams/02-implementation-scope.webp" alt="Diagram: what the infrastructure code builds, box by box" loading="lazy"><figcaption>What the infrastructure code builds, box by box</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="unproven fade">
+        <h3>What remains unproven</h3>
+        <p>The verification names what the test run did not prove, so nobody reads more into it than it shows.</p>
+        <div id="unproven"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST -->
+  <section class="section" id="cost">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">The cloud is <em>under two percent</em>.</h2>
+        <p class="fade">Figures in USD before IVA, at current prices. A following year of the pilot costs between 143,164 and 144,268. The drone service carries almost four fifths of it, and the cloud platform less than two percent.</p>
+      </div>
+      <div class="costs">
+        <article class="cost wide fade">
+          <span class="cost-l">Where a year goes</span>
+          <div class="bars" id="yearBars"></div>
+        </article>
+        <div class="cost-cards" id="costs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="section tint" id="design">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Three views, readable <em>in full sun</em>.</h2>
+        <p class="fade">The farmer, the carrier and the buyer share one identity. Warm neutrals fill the screen, color only signals, and the text that carries a decision outdoors reaches a contrast of 7 to 1.</p>
+      </div>
+
+      <div class="views fade">
+        <div class="seg" role="tablist" aria-label="Views" id="viewTabs"></div>
+        <p class="views-text" id="viewText"></p>
+        <div class="shots" id="shots"></div>
+      </div>
+
+      <div class="brand-row">
+        <div class="palette" id="palette"></div>
+        <div class="tokens">
+          <div class="badges" id="badges"></div>
+          <div class="alerts" id="alerts"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section class="section" id="evidence">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Every claim has <em>a document behind it</em>.</h2>
+        <p class="fade">Each decision keeps the alternatives that were discarded, each figure the script that calculates it, and each assumption what changes if it fails.</p>
+      </div>
+      <div class="ev" id="ev"></div>
+
+      <h3 class="sub fade">Twenty-three diagrams, one question each</h3>
+      <div class="gallery" id="gallery"></div>
+
+      <h3 class="sub fade">Nine repositories</h3>
+      <div class="repos" id="repos"></div>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <section class="outro">
+    <div class="wrap outro-in">
+      <img src="brand/isotype.png" alt="" width="56" class="outro-mark">
+      <h2 class="reveal">From the drying patio <em>to the buyer's hands</em>.</h2>
+      <div class="outro-actions">
+        <a id="outroArch" class="btn btn-blue" target="_blank" rel="noopener">Read the architecture</a>
+        <a id="outroOrg" class="btn btn-line" target="_blank" rel="noopener">Open the organization</a>
+      </div>
+    </div>
+    <svg class="waves" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+      <path class="w-red" d="M0 60 C 180 60 420 120 700 260 L0 260 Z"/>
+      <path class="w-sun" d="M300 260 C 430 150 640 120 760 150 C 900 185 1010 240 1060 260 Z"/>
+      <path class="w-blue" d="M640 260 C 860 150 1180 70 1440 60 L1440 260 Z"/>
+    </svg>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span class="foot-name">AROMA PACIFICO</span>
+    <p>An academic case study of Universidad Icesi, 2026. Its figures, pilot and 2020 design are class material and do not describe an official project of the Federación Nacional de Cafeteros. Sack codes, readings and names on the screens are examples.</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lb-close">Close</button>
+  <div class="lb-scroll" data-lenis-prevent><img alt=""></div>
+</div>
+
+</body>
+</html>
