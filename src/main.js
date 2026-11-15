@@ -205,9 +205,11 @@ function setupJourney() {
   stops.forEach((b, i) => b.addEventListener('click', () => { auto = false; go(i); }));
   go(0);
   if (reduce) return;
+  // The section holds still once the card is centered, and the scroll then walks the five stops
   ScrollTrigger.create({
-    trigger: '.jr', start: 'top 75%', end: 'top 15%', scrub: true,
-    onUpdate: (s) => { if (auto) go(Math.min(stops.length - 1, Math.floor(s.progress * stops.length))); }
+    trigger: '.jr', start: 'center center', end: '+=1500', pin: '#journey', scrub: true,
+    onUpdate: (s) => { if (auto) go(Math.min(stops.length - 1, Math.floor(s.progress * stops.length))); },
+    onLeaveBack: () => { auto = true; go(0); }
   });
 }
 
